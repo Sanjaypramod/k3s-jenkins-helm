@@ -21,8 +21,8 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t sanjaypramod/nginx-website:latest .
-          docker push sanjaypramod/nginx-website:latest
+          sudo docker build -t sanjaypramod/nginx-website:latest .
+          sudo docker push sanjaypramod/nginx-website:latest
 
       - name: Deploy to K3s on EC2
         uses: appleboy/ssh-action@v0.1.5
