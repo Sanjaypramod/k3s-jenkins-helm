@@ -35,8 +35,7 @@ jobs:
           # host: ${{ secrets.EC2_HOST }}
           host: 13.203.66.36
           username: ubuntu  # Replace with your EC2 username
-          # key: ${{ secrets.EC2_SSH_KEY }}
-          key: AAAAB3NzaC1yc2EAAAADAQABAAABAQDFAR5P8cQsemDidIlQ8KukeQ9jaI9q3c4+9W/rBXTxBkOQmoFK77zpC8Ik4qtrl9QmCjxqiXXjtuGg1FOpfyqhfppqFddpM8wOXFkaXEZhIYgb8c9KEWEwAQHYdhVegTuWYec/zhEEtfJjrSZ9HaQHq0+M+Q11CWLYFmuKz7/z9RonOMSZZPxA9cXTwf1x7fY+RgiuK+pBCFMuYxBGcsJWY3iKnFsEROJlYhdlqh153z9YKO33OOio8MBGzPbQc9NwvNWk7Tw4xCfU2C5kzptlKbgL3+wUmsJAOJdhRkYbU9LFy5HEW0yvQbfjATBXIl5fySwZDRaDDL1Fr1x4eaB5 root@ip-172-31-11-57
+          key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             kubectl apply -f <<EOF
             apiVersion: apps/v1
