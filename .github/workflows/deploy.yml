@@ -16,11 +16,10 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}  # Store username in GitHub Secrets
-          password: ${{ secrets.DOCKER_PASSWORD }}  # Store password in GitHub Secrets
-          username: sanjaypramod                    # Store username in GitHub Secrets
-          password: sanjaypramod1234                # Store password in GitHub Secrets
-
+          # username: ${{ secrets.DOCKER_USERNAME }}  # Store username in GitHub Secrets
+          # password: ${{ secrets.DOCKER_PASSWORD }}  # Store password in GitHub Secrets
+          username: sanjaypramod                 
+          password: sanjaypramod1234                
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
