@@ -32,9 +32,11 @@ jobs:
       - name: Deploy to K3s on EC2
         uses: appleboy/ssh-action@v0.1.5
         with:
-          host: ${{ secrets.EC2_HOST }}
+          # host: ${{ secrets.EC2_HOST }}
+          host: 13.203.66.36
           username: ubuntu  # Replace with your EC2 username
-          key: ${{ secrets.EC2_SSH_KEY }}
+          # key: ${{ secrets.EC2_SSH_KEY }}
+          key: AAAAB3NzaC1yc2EAAAADAQABAAABAQC7ntNkmrrWG/5eG7zStRda4w0dC2j+y1X3WxuxzrN3BUnbH5YmIiF+BMuVgLBexRuG1a+kTi46YFbcbe5oWCHL5TQ98o698Lz4+48ypKkIN/HBoW3nv6C6wIl728lreOoqwX1J2jrGGBVlcPftQDaMzsFzc5BK9T0KAAngREetK+OAZqpGjYgjwKhSpWYLYEYFnH0/SV9Eu19BMhgl+zc+B8jJRgQ+a2AQRWHnTDbberm6r58TUfBr3ag6tKiqxqzwAKo5FRFXrtIcUR0TEh24Wg9mEoTGtqiYgZXAkUuzCBN4LYzDx8v9XRHBP4QsDgBpnEUrNUmSoaIndQlShRzb k3s
           script: |
             kubectl apply -f <<EOF
             apiVersion: apps/v1
