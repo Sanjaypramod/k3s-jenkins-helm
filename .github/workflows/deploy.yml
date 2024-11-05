@@ -36,7 +36,7 @@ jobs:
           host: 13.203.66.36
           username: ubuntu  # Replace with your EC2 username
           # key: ${{ secrets.EC2_SSH_KEY }}
-          key: AAAAB3NzaC1yc2EAAAADAQABAAABAQC7ntNkmrrWG/5eG7zStRda4w0dC2j+y1X3WxuxzrN3BUnbH5YmIiF+BMuVgLBexRuG1a+kTi46YFbcbe5oWCHL5TQ98o698Lz4+48ypKkIN/HBoW3nv6C6wIl728lreOoqwX1J2jrGGBVlcPftQDaMzsFzc5BK9T0KAAngREetK+OAZqpGjYgjwKhSpWYLYEYFnH0/SV9Eu19BMhgl+zc+B8jJRgQ+a2AQRWHnTDbberm6r58TUfBr3ag6tKiqxqzwAKo5FRFXrtIcUR0TEh24Wg9mEoTGtqiYgZXAkUuzCBN4LYzDx8v9XRHBP4QsDgBpnEUrNUmSoaIndQlShRzb k3s
+          key: AAAAB3NzaC1yc2EAAAADAQABAAABAQDFAR5P8cQsemDidIlQ8KukeQ9jaI9q3c4+9W/rBXTxBkOQmoFK77zpC8Ik4qtrl9QmCjxqiXXjtuGg1FOpfyqhfppqFddpM8wOXFkaXEZhIYgb8c9KEWEwAQHYdhVegTuWYec/zhEEtfJjrSZ9HaQHq0+M+Q11CWLYFmuKz7/z9RonOMSZZPxA9cXTwf1x7fY+RgiuK+pBCFMuYxBGcsJWY3iKnFsEROJlYhdlqh153z9YKO33OOio8MBGzPbQc9NwvNWk7Tw4xCfU2C5kzptlKbgL3+wUmsJAOJdhRkYbU9LFy5HEW0yvQbfjATBXIl5fySwZDRaDDL1Fr1x4eaB5 root@ip-172-31-11-57
           script: |
             kubectl apply -f <<EOF
             apiVersion: apps/v1
