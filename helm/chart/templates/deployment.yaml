@@ -28,5 +28,5 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-config
                   key: MONGODB_URI
-          resources: {{ .Values.resources }}
-
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
