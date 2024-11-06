@@ -1,4 +1,4 @@
-name: Deploy Node.js Application with Helm
+name: Deploy Node.js mobile with Helm
 
 on:
   push:
