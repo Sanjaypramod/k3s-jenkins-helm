@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
-         with:
-          submodules: false  # Ignore submodules if you’re not using them
+        with:
+           fetch-depth: 1  # Only get the latest commit
+           submodules: false  # Ignore submodules if you’re not using them
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
