@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           ls
+          pwd
           cd mobile/
           npm install
 
