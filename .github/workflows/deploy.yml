@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd application
+          cd mobile
           npm install
 
       - name: Build Docker image
