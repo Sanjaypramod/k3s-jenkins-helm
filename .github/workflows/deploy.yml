@@ -54,16 +54,16 @@ jobs:
           echo "$KUBECONFIG" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
-      - name: Create Kubernetes namespace (if not exists)
-        run: |
-          kubectl create namespace prod || true
+      # - name: Create Kubernetes namespace (if not exists)
+      #   run: |
+      #     kubectl create namespace prod || true
 
       - name: Deploy with Helm
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           helm upgrade --install nodejs-app ./helm/chart \
-            --namespace prod \
+            --namespace default \
             --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }}
 
