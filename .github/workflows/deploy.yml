@@ -27,7 +27,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}  # Using Git SHA as a unique tag
         run: |
-          docker build -t sanjaypramod/nodejs-latest:${{ env.IMAGE_TAG }} -f application/Dockerfile application
+          docker build -t sanjaypramod/nodejs-latest:${{ env.IMAGE_TAG }} -f mobile/Dockerfile mobile
 
       - name: Log in to Docker Hub
         env:
