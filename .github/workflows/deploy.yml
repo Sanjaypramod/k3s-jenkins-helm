@@ -56,14 +56,14 @@ jobs:
 
       - name: Create Kubernetes namespace (if not exists)
         run: |
-          kubectl create namespace prod1 || true
+          kubectl create namespace prod || true
 
       - name: Deploy with Helm
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           helm upgrade --install nodejs-app ./helm/chart \
-            --namespace prod1 \
+            --namespace prod \
             --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }}
 
