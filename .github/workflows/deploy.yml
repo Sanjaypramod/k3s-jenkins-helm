@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+  build-deploy:
+    runs-on: self-hosted
 
     steps:
       - name: Check out the code
