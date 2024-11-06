@@ -50,7 +50,9 @@ jobs:
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
+          # echo "$KUBECONFIG" > $HOME/.kube/config
           echo "$KUBECONFIG" > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
 
       - name: Create Kubernetes namespace (if not exists)
         run: |
