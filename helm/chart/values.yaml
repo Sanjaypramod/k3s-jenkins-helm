@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: your-dockerhub-username/your-nodejs-image
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 5000
+
+env:
+  PORT: 5000
+  MONGODB_URI: "your-mongodb-uri"
+
+resources: {}
+

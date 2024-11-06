@@ -1,70 +1,63 @@
-name: Build, Push, and Deploy Nginx Website
+name: Deploy Node.js Application with Helm
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  build-deploy:
-    runs-on: self-hosted  # Use the self-hosted runner
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Check out the code
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd application
+          npm install
+
+      - name: Build Docker image
+        env:
+          IMAGE_TAG: ${{ github.sha }}  # Using Git SHA as a unique tag
+        run: |
+          docker build -t your-dockerhub-username/your-nodejs-image:${{ env.IMAGE_TAG }} .
+
       - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: sanjaypramod
-          password: sanjaypramod1234
-
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: sanjaypramod/nginx-website:latest
-
-      - name: Set up Kubeconfig
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config  # Make sure the KUBECONFIG secret is added in GitHub
-          chmod 600 $HOME/.kube/config  # Secure permissions
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-      - name: Deploy to K3s
+      - name: Push Docker image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
         run: |
-          kubectl apply -f - <<EOF
-          apiVersion: apps/v1
-          kind: Deployment
-          metadata:
-            name: nginx-website
-          spec:
-            replicas: 2
-            selector:
-              matchLabels:
-                app: nginx-website
-            template:
-              metadata:
-                labels:
-                  app: nginx-website
-              spec:
-                containers:
-                  - name: nginx
-                    image: sanjaypramod/nginx-website:latest
-                    ports:
-                      - containerPort: 80
-          ---
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: nginx-service
-          spec:
-            selector:
-              app: nginx-website
-            ports:
-              - protocol: TCP
-                port: 80
-                targetPort: 80
-            type: NodePort
-          EOF
+          docker push your-dockerhub-username/your-nodejs-image:${{ env.IMAGE_TAG }}
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Configure kubectl
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        run: |
+          echo "$KUBECONFIG" > $HOME/.kube/config
+
+      - name: Deploy with Helm
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          helm upgrade --install nodejs-app ./charts/nodejs-app \
+            --namespace default \
+            --set image.repository=your-dockerhub-username/your-nodejs-image \
+            --set image.tag=${{ env.IMAGE_TAG }}
+
