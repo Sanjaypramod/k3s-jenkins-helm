@@ -9,7 +9,7 @@ jobs:
   build-deploy:
     runs-on: self-hosted
 
-    # steps:
+    steps:
     #   - name: Check out the code
     #     uses: actions/checkout@v2
     #     with:
