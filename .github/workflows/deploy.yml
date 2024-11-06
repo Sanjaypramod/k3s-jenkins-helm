@@ -3,7 +3,7 @@ name: Deploy Node.js Application with Helm
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-deploy:
@@ -54,14 +54,14 @@ jobs:
 
       - name: Create Kubernetes namespace (if not exists)
         run: |
-          kubectl create namespace default || true
+          kubectl create namespace prod1 || true
 
       - name: Deploy with Helm
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           helm upgrade --install nodejs-app ./helm/chart \
-            --namespace default \
+            --namespace prod1 \
             --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }}
 
