@@ -70,6 +70,7 @@ jobs:
           git config --global user.email "$GIT_EMAIL"
           git add helm/chart/values.yaml
           git commit -m "Update image tag to ${{ env.IMAGE_TAG }}"
+          git pull --rebase https://$PAT_TOKEN@github.com/Sanjaypramod/k3s_deployment.git master
           git push https://$PAT_TOKEN@github.com/Sanjaypramod/k3s_deployment.git HEAD:master
 
       ## Step 9: Install Helm
