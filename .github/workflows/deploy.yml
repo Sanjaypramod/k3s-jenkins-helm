@@ -33,7 +33,7 @@ jobs:
       ## Step 4: Build Docker image
       - name: Build Docker image
         env:
-          IMAGE_TAG: v.${{ github.run_number }}  # Use hyphen as separator
+          IMAGE_TAG: v.${{ github.run_number }}  # Use dot as separator for consistency
         run: |
           docker build -t sanjaypramod/nodejs-latest:${{ env.IMAGE_TAG }} -f mobile/Dockerfile mobile
 
@@ -91,10 +91,10 @@ jobs:
         run: |
           kubectl create namespace prod || echo "Namespace 'prod' already exists"
 
-      ## Step 11: Deploy with Helm
+      ## Step 12: Deploy with Helm to prod Namespace
       - name: Deploy with Helm
         env:
-          IMAGE_TAG: v-${{ github.run_number }}
+          IMAGE_TAG: v.${{ github.run_number }}  # Ensure same format is used here
         run: |
           sudo helm upgrade --install nodejs-app ./helm/chart \
             --namespace prod \
