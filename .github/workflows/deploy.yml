@@ -96,7 +96,7 @@ jobs:
           IMAGE_TAG: v-${{ github.run_number }}
         run: |
           sudo helm upgrade --install nodejs-app ./helm/chart \
-            --namespace default \
+            --namespace prod \
             --kubeconfig /etc/rancher/k3s/k3s.yaml \
             --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }} \
