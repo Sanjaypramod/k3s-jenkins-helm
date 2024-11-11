@@ -53,6 +53,8 @@ jobs:
           sed -i "s|tag:.*|tag: \"${IMAGE_TAG}\"|" helm/chart/values.yaml
 
       - name: Commit updated values.yaml
+        env: 
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --global user.name "sanjaypramod"
           git config --global user.email "sanjaypramod.p@gmail.com"
