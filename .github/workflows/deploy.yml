@@ -29,7 +29,7 @@ jobs:
 
       - name: Build Docker image
         env:
-          IMAGE_TAG: ${{ github.sha }}  # Using Git SHA as a unique tag
+          IMAGE_TAG: v1.${{ github.run_number }}  # Using GitHub run number as a version tag
         run: |
           docker build -t sanjaypramod/nodejs-latest:${{ env.IMAGE_TAG }} -f mobile/Dockerfile mobile
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Push Docker image
         env:
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: v1.${{ github.run_number }}
         run: |
           docker push sanjaypramod/nodejs-latest:${{ env.IMAGE_TAG }}
 
@@ -62,10 +62,12 @@ jobs:
 
       - name: Deploy with Helm
         env:
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: v1.${{ github.run_number }}
+          REVISION: ${{ github.run_number }}  # Using GitHub Actions' run number as the revision
         run: |
           sudo helm upgrade --install nodejs-app ./helm/chart \
             --namespace default \
             --kubeconfig /etc/rancher/k3s/k3s.yaml \
             --set image.repository=sanjaypramod/nodejs-latest \
-            --set image.tag=${{ env.IMAGE_TAG }}
+            --set image.tag=${{ env.IMAGE_TAG }} \
+            --set revision=${{ env.REVISION }}
