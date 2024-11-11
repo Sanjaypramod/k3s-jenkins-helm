@@ -10,6 +10,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          submodules: false
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -18,8 +24,6 @@ jobs:
       - name: Install dependencies
         working-directory: mobile
         run: |
-          ls
-          pwd
           sudo apt install npm -y
           npm install
 
@@ -63,5 +67,5 @@ jobs:
           sudo helm upgrade --install nodejs-app ./helm/chart \
             --namespace default \
             --kubeconfig /etc/rancher/k3s/k3s.yaml \
-            --set image.repository=***/nodejs-latest \
+            --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }}
