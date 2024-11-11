@@ -11,7 +11,7 @@ service:
 
 env:
   PORT: 5000
-#   MONGODB_URI: "your-mongodb-uri"
+  MONGODB_URI: "mongodb+srv://sanjaypramodp:n9rhDEPCUq5Sln4P@cluster0.qgn6t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 resources:
   requests:
