@@ -27,6 +27,7 @@ jobs:
           ls
           pwd
           cd mobile/
+          sudo apt install npm
           npm install
 
       - name: Build Docker image
