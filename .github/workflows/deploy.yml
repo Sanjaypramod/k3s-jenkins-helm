@@ -85,6 +85,11 @@ jobs:
           echo "$KUBECONFIG" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      ## Step 11: Create 'prod' Namespace
+      - name: Create prod Namespace
+        run: |
+          kubectl create namespace prod || echo "Namespace 'prod' already exists"
+
       ## Step 11: Deploy with Helm
       - name: Deploy with Helm
         env:
