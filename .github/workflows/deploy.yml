@@ -7,15 +7,9 @@ on:
 
 jobs:
   build-deploy:
-    runs-on:  self-hosted
+    runs-on: self-hosted
 
     steps:
-    #   - name: Check out the code
-    #     uses: actions/checkout@v2
-    #     with:
-    #        fetch-depth: 1  # Only get the latest commit
-    #        submodules: false  # Ignore submodules if you’re not using them
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -56,27 +50,15 @@ jobs:
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
-          # echo "$KUBECONFIG" > $HOME/.kube/config
           echo "$KUBECONFIG" > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
-
-      # - name: Create Kubernetes namespace (if not exists)
-      #   run: |
-      #     kubectl create namespace prod || true
 
       - name: Deploy with Helm
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          # sudo helm upgrade --install nodejs-app ./helm/chart \
-          #   --namespace default \
-          #   --set image.repository=sanjaypramod/nodejs-latest \
-          #   --set image.tag=${{ env.IMAGE_TAG }}
-
-          sudo helm upgrade --install nodejs-app /home/ubuntu/actions-runner/helm/chart \
+          sudo helm upgrade --install nodejs-app ./helm/chart \
             --namespace default \
             --kubeconfig /etc/rancher/k3s/k3s.yaml \
             --set image.repository=***/nodejs-latest \
-            --set image.tag=${IMAGE_TAG}
-
-
+            --set image.tag=${{ env.IMAGE_TAG }}
