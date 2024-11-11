@@ -55,9 +55,11 @@ jobs:
       - name: Commit updated values.yaml
         env: 
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
         run: |
-          git config --global user.name "sanjaypramod"
-          git config --global user.email "sanjaypramod.p@gmail.com"
+          git config --global user.name "$GIT_USERNAME"
+          git config --global user.email "$GIT_EMAIL"
           git add helm/chart/values.yaml
           git commit -m "Update image tag to ${{ env.IMAGE_TAG }}"
           git push https://$PAT_TOKEN@github.com/Sanjaypramod/k3s_deployment.git HEAD:master
