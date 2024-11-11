@@ -4,6 +4,7 @@ metadata:
   name: {{ .Release.Name }}-deployment
   labels:
     app: {{ .Release.Name }}
+    revision: "{{ .Values.revision }}"  # Add revision label
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -13,6 +14,7 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
+        revision: "{{ .Values.revision }}"  # Add revision label inside pod metadata
     spec:
       containers:
         - name: {{ .Release.Name }}-container
