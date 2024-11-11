@@ -26,7 +26,7 @@ jobs:
         run: |
           ls
           pwd
-          sudo apt install npm
+          sudo apt install npm -y
           npm install
 
       - name: Build Docker image
