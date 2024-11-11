@@ -60,7 +60,7 @@ jobs:
           git config --global user.email "sanjaypramod.p@gmail.com"
           git add helm/chart/values.yaml
           git commit -m "Update image tag to ${{ env.IMAGE_TAG }}"
-          git push https://$PAT_TOKEN@github.com/Sanjaypramod/k3s_deployment.git HEAD:master
+          git push origin master
 
       - name: Install Helm
         run: |
