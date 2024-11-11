@@ -68,7 +68,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          helm upgrade --install nodejs-app ./helm/chart \
+          sudo helm upgrade --install nodejs-app ./helm/chart \
             --namespace default \
             --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }}
