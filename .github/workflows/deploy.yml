@@ -73,7 +73,14 @@ jobs:
           #   --set image.repository=sanjaypramod/nodejs-latest \
           #   --set image.tag=${{ env.IMAGE_TAG }}
 
-            sudo helm upgrade --install nodejs-app /home/ubuntu/actions-runner/helm/chart \
+            # sudo helm upgrade --install nodejs-app /home/ubuntu/actions-runner/helm/chart \
+            #  --namespace default \
+            #  --kubeconfig /etc/rancher/k3s/k3s.yaml \
+            #  --set image.repository=***/nodejs-latest \
+            #  --set image.tag=${IMAGE_TAG}
+
+         
+            sudo helm upgrade --install nodejs-app ./helm/chart \
              --namespace default \
              --kubeconfig /etc/rancher/k3s/k3s.yaml \
              --set image.repository=***/nodejs-latest \
