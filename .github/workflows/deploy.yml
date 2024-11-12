@@ -121,4 +121,4 @@ jobs:
             --set persistence.enabled=true \
             --set persistence.size=3Gi \
             --set adminPassword=${{ secrets.GRAFANA_ADMIN_PASSWORD }} \
-            --set service.type=ClusterIP
+            --set service.type=NodePort
