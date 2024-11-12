@@ -102,3 +102,23 @@ jobs:
             --set image.repository=sanjaypramod/nodejs-latest \
             --set image.tag=${{ env.IMAGE_TAG }} \
             --set revision=${{ github.run_number }}
+
+      ## Step 13: Deploy Grafana with Helm to monitoring Namespace
+      - name: Deploy Grafana
+        env:
+          GRAFANA_NAMESPACE: monitoring
+        run: |
+          # Add Grafana Helm repository
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo update
+
+          # Create monitoring namespace if it doesn't exist
+          kubectl create namespace $GRAFANA_NAMESPACE || echo "Namespace '$GRAFANA_NAMESPACE' already exists"
+
+          # Deploy Grafana with Helm
+          helm upgrade --install grafana grafana/grafana \
+            --namespace $GRAFANA_NAMESPACE \
+            --set persistence.enabled=true \
+            --set persistence.size=3Gi \
+            --set adminPassword=${{ secrets.GRAFANA_ADMIN_PASSWORD }} \
+            --set service.type=ClusterIP

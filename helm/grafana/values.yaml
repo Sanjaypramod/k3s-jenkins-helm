@@ -1,0 +1,19 @@
+adminUser: admin
+adminPassword: sanjay1234  # Use GitHub Secrets for sensitive information
+
+service:
+  type: ClusterIP  # or ClusterIP, depending on access requirements
+
+persistence:
+  enabled: true
+  storageClassName: standard
+  size: 3Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
