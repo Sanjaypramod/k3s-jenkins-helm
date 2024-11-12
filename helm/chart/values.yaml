@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: sanjaypramod/nodejs-latest
   pullPolicy: Always
-  tag: "v.88"
+  tag: "v.89"
 
 service:
   type: NodePort
