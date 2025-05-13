@@ -1,22 +1,18 @@
 replicaCount: 1
 
 image:
-  repository: sanjaypramod/nodejs-latest
+  repository: sanjaypramod/nodejs-k3s-sample
   pullPolicy: Always
-  tag: "v.89"
+  tag: "latest"
 
 service:
   type: NodePort
   port: 5000
 
-env:
-  PORT: 5000
-  MONGODB_URI: "mongodb+srv://sanjaypramodp:n9rhDEPCUq5Sln4P@cluster0.qgn6t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
-resources:
-  requests:
-    memory: "64Mi"
-    cpu: "250m"
-  limits:
-    memory: "128Mi"
-    cpu: "500m"
+# resources:
+#   requests:
+#     memory: "64Mi"
+#     cpu: "250m"
+#   limits:
+#     memory: "128Mi"
+#     cpu: "500m"
