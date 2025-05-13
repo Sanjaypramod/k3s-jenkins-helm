@@ -8,7 +8,9 @@ image:
 service:
   type: NodePort
   port: 5000
-
+  env:
+  MONGODB_URI: "mongodb://localhost:27017/sampledb"
+  
 # resources:
 #   requests:
 #     memory: "64Mi"
