@@ -1,10 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
-  labels:
-    app: {{ .Release.Name }}
-    revision: "{{ .Values.revision }}"  # Add revision label
+  name: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -14,21 +11,10 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
-        revision: "{{ .Values.revision }}"  # Add revision label inside pod metadata
     spec:
       containers:
-        - name: {{ .Release.Name }}-container
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - containerPort: {{ .Values.service.port }}
-          env:
-            - name: PORT
-              value: "{{ .Values.env.PORT }}"
-            - name: MONGODB_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-config
-                  key: MONGODB_URI
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+      - name: {{ .Release.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
