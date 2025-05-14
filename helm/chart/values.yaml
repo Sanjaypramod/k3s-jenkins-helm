@@ -37,6 +37,7 @@ mongodb:
   username: "sanjaypramodpdedg"  # MongoDB username
   password: "v-aBeCsfd-mpi5_mFd"  # MongoDB password
 
+
 ingress:
   enabled: true
   host: "sanjay.sbs"
