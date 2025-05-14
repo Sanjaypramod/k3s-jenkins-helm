@@ -1,34 +1,3 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: {{ .Release.Name }}
-# spec:
-#   replicas: {{ .Values.replicaCount }}
-#   selector:
-#     matchLabels:
-#       app: {{ .Release.Name }}
-#   template:
-#     metadata:
-#       labels:
-#         app: {{ .Release.Name }}
-#     spec:
-#       containers:
-#         - name: {{ .Release.Name }}
-#           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-#           ports:
-#             - containerPort: {{ .Values.service.port }}
-#           imagePullPolicy: {{ .Values.image.pullPolicy }}
-#           env:
-#             - name: MONGODB_URI
-#               value: {{ .Values.env.MONGODB_URI }}  # MongoDB URI from values.yaml
-#           resources:
-#             requests:
-#               memory: "64Mi"
-#               cpu: "250m"
-#             limits:
-#               memory: "128Mi"
-#               cpu: "500m"
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -53,16 +22,15 @@ spec:
             - name: MONGODB_URI
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-credentials  # Reference to the secret
-                  key: MONGODB_URI            # This should be the key in the secret
+                  name: mongodb-credentials  # This references the secret
+                  key: MONGODB_URI           # Key inside the secret
             - name: MONGODB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-credentials  # Reference to the secret
-                  key: MONGODB_USERNAME
+                  name: mongodb-credentials  # This references the secret
+                  key: MONGODB_USERNAME     # Key inside the secret
             - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-credentials  # Reference to the secret
-                  key: MONGODB_PASSWORD
-
+                  name: mongodb-credentials  # This references the secret
+                  key: MONGODB_PASSWORD     # Key inside the secret

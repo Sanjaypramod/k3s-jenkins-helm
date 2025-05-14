@@ -34,8 +34,8 @@ service:
   servicePort: 80  # The port that will be exposed externally
 
 mongodb:
-  username: "sanjaypramodpdedg"  # MongoDB username
-  password: "v-aBeCsfd-mpi5_mFd"  # MongoDB password
+  username: "sanjaypramodp"  # MongoDB username
+  password: "v-aBeCd-mpi5_mF"  # MongoDB password
 
 
 ingress:
