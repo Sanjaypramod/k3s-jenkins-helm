@@ -1,14 +1,43 @@
+# replicaCount: 1
+
+# image:
+#   repository: sanjaypramod/nodejs-k3s-sample
+#   pullPolicy: Always
+#   tag: "latest"
+
+# service:
+#   type: NodePort
+#   port: 4000  # Change this from 5000 to 4000
+#   targetPort: 4000  # Update target port to 4000 as well
+
+# env:
+#   MONGODB_URI: "mongodb://localhost:27017/sampledb"
+
+# ingress:
+#   enabled: true
+#   host: "sanjay.com"  # Your domain name
+#   path: "/"
+#   servicePort: 80
+
 replicaCount: 1
 
 image:
-  repository: sanjaypramod/nodejs-k3s-sample
-  pullPolicy: Always
+  repository: "sanjaypramod/nodejs-k3s-sample"
   tag: "latest"
+  pullPolicy: IfNotPresent
 
 service:
   type: NodePort
-  port: 4000  # Change this from 5000 to 4000
-  targetPort: 4000  # Update target port to 4000 as well
+  port: 80
+  targetPort: 4000  # Match the port exposed by your container
+  nodePort: 30975  # If you're using NodePort
+  servicePort: 80  # The port that will be exposed externally
 
 env:
-  MONGODB_URI: "mongodb://localhost:27017/sampledb"
+  MONGODB_URI: "mongodb+srv://sanjaypramodp:v-aBeCd-mpi5_mF@cluster0.qgn6t.mongodb.net/?retryWrites=true&w=majority"
+
+ingress:
+  enabled: true
+  host: "sanjay.sbs"
+  path: "/"
+  servicePort: 80

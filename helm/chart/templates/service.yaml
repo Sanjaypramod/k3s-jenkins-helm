@@ -1,3 +1,19 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Release.Name }}-service
+#   labels:
+#     app: {{ .Release.Name }}
+# spec:
+#   type: {{ .Values.service.type }}
+#   ports:
+#     - port: {{ .Values.service.port }}
+#       targetPort: {{ .Values.service.port }}
+#       protocol: TCP
+#   selector:
+#     app: {{ .Release.Name }}
+
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,11 +21,10 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.type | default "ClusterIP" }}  # Default to ClusterIP
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort | default .Values.service.port }}  # Default targetPort to the same value as port
       protocol: TCP
   selector:
     app: {{ .Release.Name }}
-
