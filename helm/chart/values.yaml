@@ -33,9 +33,9 @@ service:
   nodePort: 30975  # If you're using NodePort
   servicePort: 80  # The port that will be exposed externally
 
-# mongodb:
-#   username: "sanjaypramodp"  # MongoDB username
-#   password: "v-aBeCd-mpi5_mF"  # MongoDB password
+mongodb:
+  username: "sanjaypramodp"  # MongoDB username
+  password: "v-aBeCd-mpi5_mF"  # MongoDB password
 
 
 ingress:
