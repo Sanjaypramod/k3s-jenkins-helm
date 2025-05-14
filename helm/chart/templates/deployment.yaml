@@ -53,15 +53,15 @@ spec:
             - name: MONGODB_URI
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-credentials  # Reference the secret here
-                  key: MONGODB_URI            # Use the MONGODB_URI key from the secret
+                  name: mongodb-credentials
+                  key: MONGODB_URI
             - name: MONGODB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-credentials  # Reference the secret here
+                  name: mongodb-credentials
                   key: MONGODB_USERNAME
             - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-credentials  # Reference the secret here
+                  name: mongodb-credentials
                   key: MONGODB_PASSWORD
