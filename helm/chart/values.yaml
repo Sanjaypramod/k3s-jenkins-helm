@@ -42,8 +42,3 @@ ingress:
   path: "/"
   servicePort: 80
 
-  
-mongodb:
-  username: "sanjaypramodp"       # MongoDB username (non-sensitive in values.yaml)
-  password: "v-aBeCd-mpi5_mF"     # MongoDB password (non-sensitive in values.yaml)
-
