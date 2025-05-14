@@ -13,11 +13,22 @@
 #         app: {{ .Release.Name }}
 #     spec:
 #       containers:
-#       - name: {{ .Release.Name }}
-#         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-#         ports:
-#         - containerPort: {{ .Values.service.port }}
-#         imagePullPolicy: {{ .Values.image.pullPolicy }}
+#         - name: {{ .Release.Name }}
+#           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+#           ports:
+#             - containerPort: {{ .Values.service.port }}
+#           imagePullPolicy: {{ .Values.image.pullPolicy }}
+#           env:
+#             - name: MONGODB_URI
+#               value: {{ .Values.env.MONGODB_URI }}  # MongoDB URI from values.yaml
+#           resources:
+#             requests:
+#               memory: "64Mi"
+#               cpu: "250m"
+#             limits:
+#               memory: "128Mi"
+#               cpu: "500m"
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,11 +51,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: MONGODB_URI
-              value: {{ .Values.env.MONGODB_URI }}  # MongoDB URI from values.yaml
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-credentials  # Referencing the secret we created
+                  key: MONGODB_URI            # You can add this in the secret to form the URI
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-credentials
+                  key: MONGODB_USERNAME
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-credentials
+                  key: MONGODB_PASSWORD
